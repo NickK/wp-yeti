@@ -15,16 +15,23 @@ def configure_db():
 	try:
 	    with connection.cursor() as cursor:
 	        # Read a single record
-	        sql = "UPDATE "+ db.config['prefix'] + "options SET option_value = '' WHERE option_name = 'blogdescription'"
-	        cursor.execute(sql)
 
-	        sql = "UPDATE "+ db.config['prefix'] + "options SET option_value = '/blog/%postname%/' WHERE option_name = 'permalink_structure'"
-	        cursor.execute(sql)
+	        boolean = input('Would you like to empty the blog description? (y/n) ')
+	        if (boolean == 'y'):
+	        	sql = "UPDATE "+ db.config['prefix'] + "options SET option_value = '' WHERE option_name = 'blogdescription'"
+	        	cursor.execute(sql)
 
-	        sql = "UPDATE "+ db.config['prefix'] + "options SET option_value = 0 WHERE option_name = 'thumbnail_size_w' or option_name = 'thumbnail_size_h' or option_name = 'medium_size_w' or option_name = 'medium_size_h' or option_name = 'large_size_w' or option_name = 'large_size_h'"
-	        cursor.execute(sql)
-	        connection.commit()
+	        boolean = input('Would you like to change the permalink structure to /%postname%/ ? (y/n) ')
+	        if (boolean == 'y'):
+	        	sql = "UPDATE "+ db.config['prefix'] + "options SET option_value = '/%postname%/' WHERE option_name = 'permalink_structure'"
+	        	cursor.execute(sql)
 
+
+	        boolean = input('Would you like to change all the media image sizes to 0 ? (y/n) ')
+	        if (boolean == 'y'):
+	       		sql = "UPDATE "+ db.config['prefix'] + "options SET option_value = 0 WHERE option_name = 'thumbnail_size_w' or option_name = 'thumbnail_size_h' or option_name = 'medium_size_w' or option_name = 'medium_size_h' or option_name = 'large_size_w' or option_name = 'large_size_h'"
+	        	cursor.execute(sql)
+	        
 	        boolean = input('Would you like to add pages? (y/n) ')
 	        if (boolean == 'y'):
 		        count = 3
@@ -38,9 +45,11 @@ def configure_db():
 
 
 		       	cursor.execute(insert_sql[:-1])
-		       	connection.commit()
 
 	        #
+	
+	       	connection.commit()
+
 	finally:
 	    connection.close()
 

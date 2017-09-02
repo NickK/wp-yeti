@@ -50,9 +50,9 @@ def init():
 
 
 	# Create custom style.css through input questions
-	print('Setting up style.css..')
-	themename = input('Theme Name? ')
-	description = input('Theme Description? ')
+	print('Creating style.css..')
+	themename = input('Theme name for stylesheet? ')
+	description = input('Theme description for stylesheet? ')
 
 	if themename and description:
 		files.createFile(
