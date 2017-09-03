@@ -1,9 +1,12 @@
-#template.py
+#custom_posts.py
 import os
 from libs.config import app
 from libs.classes import createFiles as createClass
 
 def init(name):
+	#define config vars
+	CUSTOM_POSTS_FOLDER = os.environ.get('CUSTOM_POSTS')
+
 	custom_post_name = name
 	plural = input('Plural Label: ').lower()
 	singular = input('Singular Label: ').lower()
@@ -15,7 +18,7 @@ def init(name):
 	files = createClass.createClass()
 	files.createFile(
 		custom_post_name.lower() + '.php',
-		app.config['folders']['custom_posts'],
+		CUSTOM_POSTS_FOLDER,
 		"<?php\n" +
 		"$labels = array(\n" +
 		"	'name' => _x('" + plural_fupper + "', 'post type " + plural + "'),\n" +

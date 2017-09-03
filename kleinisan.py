@@ -1,6 +1,12 @@
+import os
+import argparse
 from libs.commands import *
 from libs.config import app
-import argparse
+from dotenv import load_dotenv
+
+dotenv_path = '../.env'
+load_dotenv(dotenv_path)
+
 
 class Kleinisan:
 	def __init__(self):

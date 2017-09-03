@@ -1,15 +1,15 @@
-#template.py
-from libs.config import db
+#db.py
 from libs.classes import createFiles as createClass
 import pymysql.cursors
 
 def configure_db():
+
 	# Connect to the database
-	connection = pymysql.connect(host=db.config['host'],
-	                             user=db.config['user'],
-	                             password=db.config['password'],
-	                             db=db.config['db'],
-	                             charset=db.config['charset'],
+	connection = pymysql.connect(host=os.environ.get("DB_HOST"),
+	                             user=os.environ.get("DB_USER"),
+	                             password=os.environ.get("DB_PASSWORD"),
+	                             db=os.environ.get("DB_NAME"),
+	                             charset=os.environ.get("DB_CHARSET"),
 	                             cursorclass=pymysql.cursors.DictCursor)
 
 	try:
@@ -52,6 +52,7 @@ def configure_db():
 
 	finally:
 	    connection.close()
+
 
 def slugify(text):
 	text = text.replace(' ', '-').lower()

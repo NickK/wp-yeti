@@ -1,9 +1,12 @@
-#template.py
+#taxonomy.py
+import os
 from libs.config import app
 from libs.classes import createFiles as createClass
 
 def init(name):
-	#(taxonomyname, custom_post, taxonomylabel, taxonomyadditem)
+	#define config vars
+	CUSTOM_POSTS_FOLDER = os.environ.get('CUSTOM_POSTS')
+
 	taxonomyname = 'taxonomy-' + name
 	registertaxonomyname = input('Taxonomy Name (used for register_taxonomy. Used for fetching data): ')
 	custom_post = input('Which custom post type does it belong to: ')
@@ -14,7 +17,7 @@ def init(name):
 	#passing path through is weird
 	files.createFile(
 		taxonomyname + '.php',
-		app.config['folders']['custom_posts'],
+		CUSTOM_POSTS_FOLDER,
 		"<?php\n"+
 		"$labels = array(\n"+
 		"	'name'        => '" + taxonomylabel + "',\n"+
