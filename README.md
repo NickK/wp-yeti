@@ -13,10 +13,12 @@ Timber::render( array( 'template-gallery.twig' ), $context );
 ```
 
 ### Requirements
-In order to run this script you will need python 3. Here's how to get it for each platform:
+In order to run this script you will need python3 and python-dotenv (pip install python-dotenv). Here's how to get it for each platform:
 
 ### How to use it
-Place the kleinisan folder inside your theme folder, and navigate to the kleinisan folder using terminal. A regular command looks like this.
+1. Place the folder inside your root folder
+2. Change the details inside the .env and copy it to the root folder
+3. Navigate to kleinisan through terminal
 
 ```python3 kleinisan.py --make:template gallery```
 

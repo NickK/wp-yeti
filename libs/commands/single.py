@@ -1,13 +1,17 @@
 #single.py
-from libs.config import app
+import os
 from libs.classes import createFiles as createClass
 
 def init(name):
+	#define config vars	
+	CUSTOM_POSTS = os.environ.get('CUSTOM_POSTS')
+	VIEWS_FOLDER = os.environ.get('VIEWS_FOLDER')
+
 	singlename = 'single-' + name
 	files = createClass.createClass()
 	files.createFile(
 		singlename + '.php',
-		app.config['folders']['theme_folder'],
+		THEME_FOLDER,
 		"<?php\n" +
 		"$context = Timber::get_context();\n" +
 		"$post = Timber::query_post();\n" +
@@ -17,5 +21,5 @@ def init(name):
 
 	files.createFile(
 		singlename + '.twig',
-		app.config['folders']['views']
+		VIEWS_FOLDER
 	)
