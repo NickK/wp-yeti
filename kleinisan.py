@@ -4,6 +4,7 @@ from libs.commands import *
 from libs.config import app
 from dotenv import load_dotenv
 
+#load env file
 dotenv_path = '../.env'
 load_dotenv(dotenv_path)
 
@@ -31,6 +32,13 @@ class Kleinisan:
 		parser.add_argument('--build:theme', dest='build_theme', action='store_true', help='Build theme (Starter Theme etc)')
 		parser.add_argument('--build:configure_db', dest='configure_db', action='store_true', help='Default configuration for database')
 
+		parser.add_argument('--inject:scripts', dest='inject_scripts', action='store_true', help='Add wp_enqueue_scripts to functions file')
+		parser.add_argument('--inject:api_routing', dest='inject_api_routing', action='store_true', help='Add Routes::map to functions file')
+		parser.add_argument('--inject:options_menu', dest='inject_options_menu', action='store_true', help='Add register_options_page to functions file')
+		parser.add_argument('--inject:add_images', dest='inject_add_images', action='store_true', help='Default configuration for database')
+		parser.add_argument('--inject:acf_gmaps_key', dest='inject_acf_gmaps_key', action='store_true', help='Add acf_update_setting (gmaps key) to functions file')
+		parser.add_argument('--inject:acf_save_json', dest='inject_acf_save_json', action='store_true', help='Add ACF save/load JSON to functions file')
+
 
 		args = parser.parse_args()
 		self.getCommand(args)
@@ -39,6 +47,7 @@ class Kleinisan:
 		if args.version:
 			print('Version: ' + str(app.config['version']))
 		if args.make_template:
+			
 			template.init(args.make_template)
 		if args.make_page:
 			page.init(args.make_page)
@@ -64,5 +73,18 @@ class Kleinisan:
 			theme.init()
 		if args.configure_db:
 			db.configure_db()
+		if args.inject_scripts:
+			inject.scripts()
+		if args.inject_api_routing:
+			inject.api_routing()
+		if args.inject_acf_save_json:
+			inject.acf_save_json()
+		if args.inject_acf_gmaps_key:
+			inject.acf_gmaps_key()
+		if args.inject_options_menu:
+			inject.options()
+		if args.inject_add_images:
+			inject.add_images()
 
+			
 klein = Kleinisan()

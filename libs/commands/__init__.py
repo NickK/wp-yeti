@@ -1,1 +1,1 @@
-__all__ = ['template', 'page', 'single', 'custom_posts', 'js', 'taxonomy', 'ajax', 'api', 'acf', 'theme', 'db']
+__all__ = ['template', 'page', 'single', 'custom_posts', 'js', 'taxonomy', 'ajax', 'api', 'acf', 'theme', 'db', 'inject']
