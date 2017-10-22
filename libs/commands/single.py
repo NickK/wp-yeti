@@ -4,7 +4,7 @@ from libs.classes import createFiles as createClass
 
 def init(name):
 	#define config vars	
-	CUSTOM_POSTS = os.environ.get('CUSTOM_POSTS')
+	THEME_FOLDER = os.environ.get("THEME_FOLDER")
 	VIEWS_FOLDER = os.environ.get('VIEWS_FOLDER')
 
 	singlename = 'single-' + name

@@ -9,11 +9,11 @@ dotenv_path = '../.env'
 load_dotenv(dotenv_path)
 
 
-class Kleinisan:
+class Yeti:
 	def __init__(self):
 
-		parser = argparse.ArgumentParser(prog='Kleinisan')
-		parser.add_argument('-v', '--version', dest='version', action='store_true', help='Get version number of kleinisan')
+		parser = argparse.ArgumentParser(prog='WP Yeti')
+		parser.add_argument('-v', '--version', dest='version', action='store_true', help='Get version number of WP-Yeti')
 
 		parser.add_argument('--make:template', dest='make_template', metavar='name', help='Create a page template file')
 		parser.add_argument('--make:page', dest='make_page', metavar='name', help='Create a page file')
@@ -99,4 +99,4 @@ class Kleinisan:
 			insert.Insert().acf_save_json()
 
 
-klein = Kleinisan()
+yeti = Yeti()
