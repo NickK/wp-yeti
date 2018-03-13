@@ -1,6 +1,7 @@
 #db.py
 from libs.classes import createFiles as createClass
 import pymysql.cursors
+import os
 
 def configure_db():
 
@@ -18,24 +19,24 @@ def configure_db():
 
 	        boolean = input('Would you like to empty the blog description? (y/n) ')
 	        if (boolean == 'y'):
-	        	sql = "UPDATE "+ db.config['prefix'] + "options SET option_value = '' WHERE option_name = 'blogdescription'"
+	        	sql = "UPDATE "+ os.environ.get("DB_PREFIX") + "options SET option_value = '' WHERE option_name = 'blogdescription'"
 	        	cursor.execute(sql)
 
 	        boolean = input('Would you like to change the permalink structure to /%postname%/ ? (y/n) ')
 	        if (boolean == 'y'):
-	        	sql = "UPDATE "+ db.config['prefix'] + "options SET option_value = '/%postname%/' WHERE option_name = 'permalink_structure'"
+	        	sql = "UPDATE "+ os.environ.get("DB_PREFIX") + "options SET option_value = '/%postname%/' WHERE option_name = 'permalink_structure'"
 	        	cursor.execute(sql)
 
 
 	        boolean = input('Would you like to change all the media image sizes to 0 ? (y/n) ')
 	        if (boolean == 'y'):
-	       		sql = "UPDATE "+ db.config['prefix'] + "options SET option_value = 0 WHERE option_name = 'thumbnail_size_w' or option_name = 'thumbnail_size_h' or option_name = 'medium_size_w' or option_name = 'medium_size_h' or option_name = 'large_size_w' or option_name = 'large_size_h'"
+	       		sql = "UPDATE "+ os.environ.get("DB_PREFIX") + "options SET option_value = 0 WHERE option_name = 'thumbnail_size_w' or option_name = 'thumbnail_size_h' or option_name = 'medium_size_w' or option_name = 'medium_size_h' or option_name = 'large_size_w' or option_name = 'large_size_h'"
 	        	cursor.execute(sql)
 	        
 	        boolean = input('Would you like to add pages? (y/n) ')
 	        if (boolean == 'y'):
 		        count = 3
-		        insert_sql = 'INSERT INTO '+ db.config['prefix'] + 'posts (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_title`, `post_excerpt`, `post_status`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_content_filtered`, `post_parent`, `guid`, `menu_order`, `post_type`, `post_mime_type`, `comment_count`) VALUES '
+		        insert_sql = 'INSERT INTO '+ os.environ.get("DB_PREFIX") + 'posts (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_title`, `post_excerpt`, `post_status`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_content_filtered`, `post_parent`, `guid`, `menu_order`, `post_type`, `post_mime_type`, `comment_count`) VALUES '
 		        pages = input('Which pages would you like to create automatically? (Comma seperated+no spacing before and after) ')
 		       	pages = pages.split(',')
 		       	for page in pages:
