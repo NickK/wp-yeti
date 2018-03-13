@@ -73,11 +73,10 @@ class Insert:
 	def menus(self):
 		with open(self.THEME_FOLDER + 'functions.php', 'a') as f:
 		    f.write("\n\n\n"
-					"// Register the global option page for editing templates\n"+
-					"if(function_exists('register_options_page')) {\n"+
-					"  register_options_page('Navigation');\n"+
-					"}"
-			)
+					"register_nav_menus( array(\n"
+					"	'primary' => 'Primary Navigation',\n"
+					") );\n"
+			);
 
 	def cache_json(self):
 		with open(self.THEME_FOLDER + 'functions.php', 'a') as f:
