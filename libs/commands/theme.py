@@ -21,8 +21,7 @@ def init():
 	files.dir_exist(tmp)
 
 	# Composer install
-	print(ROOT_FOLDER)
-	call('cd' + ROOT_FOLDER + '&& composer install', shell=True)
+	call('cd ' + ROOT_FOLDER + '&& composer install', shell=True)
 
 	# Fetch ACF (bought plugins) & move it to plugins
 	if (ACF_KEY != 'INSERTKEY'):
