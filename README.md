@@ -113,13 +113,21 @@ Created ../wp-content/themes/[THEME]/acf-json/group_58e2e23fe9d48.json..
 Created ../wp-content/themes/[THEME]/acf-json/group_58e3d20cb88e9.json..
 ```
 
-#### --build:theme
-This command does the following things:
+#### --build:first_project
+This command is used when you first start developing a new project. This command does the following things:
 
 - This command executes the composer file inside your root folder, which will fetch your plugins and WP core files.
 - If you've entered the ACF key inside your .env file it will fetch the latest ACF PRO plugin
 - Fetches the most up-to-date theme files from Timbers starter theme (https://github.com/timber/starter-theme)
 - Creates a custom style.css inside your theme folder
+
+#### --build:finished_project
+This command is used for finished projects. This command does the following things:
+
+- This command executes the composer file inside your root folder, which will fetch your plugins and WP core files.
+- If you've entered the ACF key inside your .env file it will fetch the latest ACF PRO plugin
+- Sets up a prepared wp-config file with phpenv support (+ an option to use multisite wp-config)
+- Search & Replace + Import DB
 
 #### --build:configure_db
 After you've set up the build and set up the database, you can use this command to setup some database options. You will be able to choose which options you want, and which ones you don't. This command can do the the following things:
