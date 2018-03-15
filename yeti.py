@@ -12,6 +12,9 @@ load_dotenv(dotenv_path)
 class Yeti:
 	def __init__(self):
 
+
+		arguements = []
+
 		parser = argparse.ArgumentParser(prog='WP Yeti')
 		parser.add_argument('-v', '--version', dest='version', action='store_true', help='Get version number of WP-Yeti')
 
@@ -54,7 +57,6 @@ class Yeti:
 			print('Version: ' + str(app.config['version']))
 		if args.make_template:
 			template.Template(args.make_template)
-			#template.init(args.make_template)
 		if args.make_page:
 			page.init(args.make_page)
 		if args.make_single:
@@ -93,7 +95,6 @@ class Yeti:
 			insert.Insert().menus()
 		if args.insert_cache_json:
 			insert.Insert().cache_json()
-
 		if args.insert_acf_gmaps_key:
 			insert.Insert().acf_gmaps_key()
 		if args.insert_acf_save_json:

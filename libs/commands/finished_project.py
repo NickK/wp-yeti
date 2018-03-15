@@ -23,6 +23,7 @@ class BuildProject:
 		self.DB_PASSWORD = os.environ.get("DB_PASSWORD")
 		self.DB_NAME = os.environ.get("DB_NAME")
 
+
 		self.fetchFiles()
 		self.handleDB()
 
@@ -34,8 +35,8 @@ class BuildProject:
 		files.dir_exist(tmp)
 
 		core = input('Setup & download WordPress + Plugins? (y/n): ')
-		multisite = input('Multi-site installation? (y/n): ')
 		if core == 'y':
+			multisite = input('Multi-site installation? (y/n): ')
 			# Composer install
 			call('cd ' + self.ROOT_FOLDER + '&& composer install', shell=True)
 
@@ -51,7 +52,7 @@ class BuildProject:
 						call('unzip ' + tmp + filename + '.zip -d ' + tmp, shell=True)
 					
 					if files.file_exist(tmp + 'advanced-custom-fields-pro'):
-						os.rename(tmp + 'advanced-custom-fields-pro', self.PLUGINS_FOLDER + 'advanced-custom-fields-pro')
+						shutil.move(tmp + 'advanced-custom-fields-pro', self.PLUGINS_FOLDER + 'advanced-custom-fields-pro')
 						files.response(self.PLUGINS_FOLDER + 'advanced-custom-fields-pro')
 
 
@@ -60,6 +61,18 @@ class BuildProject:
 				shutil.copy(self.FILES_FOLDER + 'multisite-config.php', self.ROOT_FOLDER + 'wp-config.php')
 			else:
 				shutil.copy(self.FILES_FOLDER + 'regular-config.php', ROOT_FOLDER + 'wp-config.php')
+
+			wp = input('Move /wp/ installation to root? (y/n): ')
+			if wp:
+				# move php files to root
+				sourcefiles = os.listdir(self.ROOT_FOLDER + 'wp/')
+				for item in sourcefiles:
+					if item.endswith('.php'):
+						shutil.move(self.ROOT_FOLDER + 'wp/' + item, self.ROOT_FOLDER)
+
+				# Move two folders to root
+				shutil.move(self.ROOT_FOLDER + 'wp/wp-includes', self.ROOT_FOLDER)
+				shutil.move(self.ROOT_FOLDER + 'wp/wp-admin', self.ROOT_FOLDER)
 
 			#remove tmp folder
 			call('rm -rf tmp', shell=True)
